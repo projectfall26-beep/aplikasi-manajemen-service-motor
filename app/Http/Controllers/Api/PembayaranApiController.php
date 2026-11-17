@@ -12,8 +12,12 @@ class PembayaranApiController extends Controller
     /**
      * GET /api/pembayaran
      */
-    public function index()
+    public function index(Request $request)
     {
+        if (str_contains($request->header('Accept', ''), 'text/html')) {
+            return redirect()->route('pembayaran.index');
+        }
+
         $pembayarans = Pembayaran::with(['dataService.daftarService.pelanggan', 'dataService.daftarService.kendaraan'])->latest()->get();
 
         return response()->json([

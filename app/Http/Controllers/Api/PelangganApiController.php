@@ -13,8 +13,13 @@ class PelangganApiController extends Controller
      * GET /api/pelanggan
      * Mengambil seluruh data pelanggan
      */
-    public function index()
+    public function index(Request $request)
     {
+        // Jika diakses langsung lewat browser (bukan Postman), alihkan ke halaman tampilan web
+        if (str_contains($request->header('Accept', ''), 'text/html')) {
+            return redirect()->route('pelanggan.index');
+        }
+
         $pelanggans = Pelanggan::latest()->get();
 
         return response()->json([

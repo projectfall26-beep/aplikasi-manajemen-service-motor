@@ -13,8 +13,12 @@ class KendaraanApiController extends Controller
     /**
      * GET /api/kendaraan
      */
-    public function index()
+    public function index(Request $request)
     {
+        if (str_contains($request->header('Accept', ''), 'text/html')) {
+            return redirect()->route('kendaraan.index');
+        }
+
         $kendaraans = Kendaraan::latest()->get();
 
         return response()->json([

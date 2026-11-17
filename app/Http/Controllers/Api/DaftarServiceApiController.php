@@ -12,8 +12,12 @@ class DaftarServiceApiController extends Controller
     /**
      * GET /api/daftar-service
      */
-    public function index()
+    public function index(Request $request)
     {
+        if (str_contains($request->header('Accept', ''), 'text/html')) {
+            return redirect()->route('daftar-service.index');
+        }
+
         $daftarServices = DaftarService::with(['pelanggan', 'kendaraan', 'dataService.pembayaran'])->latest()->get();
 
         return response()->json([

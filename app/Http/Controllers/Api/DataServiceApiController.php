@@ -12,8 +12,12 @@ class DataServiceApiController extends Controller
     /**
      * GET /api/data-service
      */
-    public function index()
+    public function index(Request $request)
     {
+        if (str_contains($request->header('Accept', ''), 'text/html')) {
+            return redirect()->route('data-service.index');
+        }
+
         $dataServices = DataService::with(['daftarService.pelanggan', 'daftarService.kendaraan', 'pembayaran'])->latest()->get();
 
         return response()->json([

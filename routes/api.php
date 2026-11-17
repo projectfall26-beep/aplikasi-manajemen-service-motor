@@ -14,17 +14,19 @@ use App\Http\Controllers\Api\PembayaranApiController;
 | Seluruh endpoint didesain dengan format JSON responsif untuk pengujian Postman.
 */
 
-// 1. API Modul Pelanggan
-Route::apiResource('pelanggan', PelangganApiController::class);
+Route::name('api.')->group(function () {
+    // 1. API Modul Pelanggan
+    Route::apiResource('pelanggan', PelangganApiController::class);
 
-// 2. API Modul Kendaraan
-Route::apiResource('kendaraan', KendaraanApiController::class);
+    // 2. API Modul Kendaraan
+    Route::apiResource('kendaraan', KendaraanApiController::class);
 
-// 3. API Modul Daftar Service
-Route::apiResource('daftar-service', DaftarServiceApiController::class);
+    // 3. API Modul Daftar Service
+    Route::apiResource('daftar-service', DaftarServiceApiController::class);
 
-// 4. API Modul Data Service
-Route::apiResource('data-service', DataServiceApiController::class);
+    // 4. API Modul Data Service
+    Route::apiResource('data-service', DataServiceApiController::class);
 
-// 5. API Modul Pembayaran Service
-Route::apiResource('pembayaran', PembayaranApiController::class);
+    // 5. API Modul Pembayaran Service
+    Route::apiResource('pembayaran', PembayaranApiController::class);
+});
